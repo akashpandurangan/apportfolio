@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Google Sans Flex", "Google Sans", "Product Sans", system-ui, sans-serif;
+  --font-nunito: "Nunito", sans-serif;
+  --color-ink: #252525;
+  --color-ink-soft: #202020;
+  --color-chip: #f6f6f6;
+  --color-brand: #ff471a;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/*
+ * Figma's "auto" line-height for Google Sans Flex is 1.2578 x font-size, rounded
+ * to whole pixels. Browsers' `normal` and Tailwind preflight's 1.5 both differ,
+ * which shifts every section height. Utilities (leading-*) still win (they sit
+ * in a later layer).
+ */
+@layer base {
+  *,
+  ::before,
+  ::after {
+    line-height: 1.2578;
+    line-height: round(1.2578em, 1px);
+  }
+}
+
+body {
+  margin: 0;
+  background: #fff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-variation-settings: "GRAD" 0, "ROND" 0, "wdth" 100;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Figma "text-box-trim: trim-both" — ignored by browsers that lack support */
+.trim {
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+}
