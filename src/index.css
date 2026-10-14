@@ -7,10 +7,13 @@
   --color-ink-soft: #202020;
   --color-chip: #f6f6f6;
   --color-brand: #ff471a;
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 html {
   scroll-behavior: smooth;
+  /* sticky header sits above anchored sections */
+  scroll-padding-top: 128px;
 }
 
 /*
@@ -41,4 +44,180 @@ body {
 .trim {
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
+}
+
+/* ------------------------------------------------------------------ focus */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 3px;
+}
+
+/* ------------------------------------------------------- scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 0.8s var(--ease-out-expo) var(--d, 0ms),
+    transform 0.8s var(--ease-out-expo) var(--d, 0ms);
+  will-change: opacity, transform;
+}
+.reveal[data-in] {
+  opacity: 1;
+  transform: none;
+}
+
+/* ------------------------------------------------------ dark CTA button */
+/* hover: a small, smooth lift only — no colour, background or shadow changes */
+.btn-dark {
+  transition: transform 0.3s var(--ease-out-expo);
+}
+.btn-dark:hover,
+.btn-dark:focus-visible {
+  transform: translateY(-2px);
+}
+.btn-dark:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* --------------------------------------------- animated profile ring */
+@property --ring-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+.avatar-ring {
+  position: absolute;
+  inset: -3px;
+  padding: 3px;
+  border-radius: 60px;
+  background: conic-gradient(
+    from var(--ring-angle),
+    #ff471a,
+    #ff9a6e 18%,
+    #ff471a 38%,
+    #ffc3a8 55%,
+    #ff471a 72%,
+    #ff7a4d 86%,
+    #ff471a
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  animation: ring-spin 6s linear infinite;
+  pointer-events: none;
+}
+.avatar-glow {
+  animation: ring-glow 3.6s ease-in-out infinite alternate;
+}
+@keyframes ring-spin {
+  to {
+    --ring-angle: 360deg;
+  }
+}
+@keyframes ring-glow {
+  from {
+    box-shadow: 0 0 0 0 rgba(255, 71, 26, 0);
+  }
+  to {
+    box-shadow: 0 0 18px 2px rgba(255, 71, 26, 0.3);
+  }
+}
+
+/* ------------------------------------------------- hero gradient drift */
+.hero-ellipse {
+  animation: hero-drift 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.hero-orb {
+  position: absolute;
+  top: 60px;
+  left: 30%;
+  width: 640px;
+  height: 640px;
+  border-radius: 9999px;
+  background: radial-gradient(closest-side, rgba(255, 110, 60, 0.32), rgba(255, 110, 60, 0));
+  animation: hero-orb 22s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes hero-drift {
+  from {
+    transform: translate3d(-36px, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(44px, 26px, 0) scale(1.06);
+  }
+}
+@keyframes hero-orb {
+  from {
+    transform: translate3d(0, 0, 0) scale(0.9);
+  }
+  to {
+    transform: translate3d(620px, 60px, 0) scale(1.15);
+  }
+}
+
+/* ----------------------------------------------------- logo marquee */
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 48s linear infinite;
+  will-change: transform;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* ---------------------------------------------------- mobile menu */
+.menu-panel {
+  animation: menu-in 0.28s var(--ease-out-expo) both;
+  transform-origin: top center;
+}
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+}
+
+/* ------------------------------------------------- reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  ::before,
+  ::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  /* static, centred logo strip (the original design) */
+  .marquee {
+    display: flex;
+    justify-content: center;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .marquee-dup {
+    display: none;
+  }
 }

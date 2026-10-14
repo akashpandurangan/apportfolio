@@ -15,14 +15,19 @@ const sizes = {
 export default function Avatar({ size = 'sm' }) {
   const s = sizes[size]
   return (
-    <div className={`relative shrink-0 rounded-[60px] border-3 border-solid border-brand ${s.outer}`}>
+    // the transparent 3px border keeps the exact Figma geometry; the animated ring paints over it
+    <div className={`avatar-glow relative shrink-0 rounded-[60px] border-3 border-solid border-transparent ${s.outer}`}>
+      <span aria-hidden className="avatar-ring" />
       <div
         className={`absolute overflow-clip rounded-[60px] border border-solid border-black/10 bg-white ${s.inner}`}
       >
         <div className={`absolute ${s.photo}`}>
           <img
             alt="Akash Pandurangan"
-            src="/assets/profile.png"
+            src="/assets/profile.webp"
+            width="93"
+            height="93"
+            decoding="async"
             className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
           />
         </div>

@@ -1,3 +1,5 @@
+import Reveal from './Reveal'
+
 const A = '/assets/exp'
 
 // Third-company mark is built from two SVG glyphs plus a few teal squares.
@@ -46,23 +48,24 @@ const jobs = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="mx-auto w-full max-w-[1728px] px-4 py-12 md:px-[80px] lg:px-[160px] lg:py-[80px]">
-      <h2 className="trim text-center text-[40px] font-semibold text-ink md:text-[50px]">Experience</h2>
-      <div className="mx-auto mt-[60px] flex w-full max-w-[1040px] flex-col gap-[30px]">
-        {jobs.map((j) => (
-          <div
-            key={j.role}
-            className="flex flex-col gap-4 rounded-[40px] bg-chip px-6 py-8 md:flex-row md:items-center md:justify-between md:rounded-[180px] md:px-[60px] md:py-[40px]"
-          >
-            <div className="flex items-center gap-6">
-              {j.badge}
-              <div className="flex flex-col items-start gap-[30px] leading-[normal] md:whitespace-nowrap">
-                <p className="trim text-[24px] font-medium text-ink md:text-[36px]">{j.role}</p>
-                <p className="trim text-[16px] text-ink-soft md:text-[22px]">{j.company}</p>
+    <section id="experience" className="mx-auto w-full max-w-[1728px] px-4 py-12 md:px-[80px] xl:px-[160px] xl:py-[80px]">
+      <Reveal>
+        <h2 className="trim text-center text-[40px] font-semibold text-ink md:text-[50px]">Experience</h2>
+      </Reveal>
+      <div className="mx-auto mt-10 flex w-full max-w-[1040px] flex-col gap-[30px] md:mt-[60px]">
+        {jobs.map((j, i) => (
+          <Reveal key={j.role} delay={i * 110}>
+            <div className="flex flex-col gap-4 rounded-[40px] bg-chip px-6 py-8 xl:flex-row xl:items-center xl:justify-between xl:rounded-[180px] xl:px-[60px] xl:py-[40px]">
+              <div className="flex min-w-0 items-center gap-6">
+                {j.badge}
+                <div className="flex min-w-0 flex-col items-start gap-[30px] xl:whitespace-nowrap">
+                  <p className="trim text-[24px] font-medium text-ink sm:text-[30px] xl:text-[36px]">{j.role}</p>
+                  <p className="trim text-[16px] text-ink-soft sm:text-[18px] xl:text-[22px]">{j.company}</p>
+                </div>
               </div>
+              <p className="trim text-[18px] whitespace-nowrap text-ink-soft xl:text-[22px]">{j.period}</p>
             </div>
-            <p className="trim text-[18px] whitespace-nowrap text-ink-soft md:text-[22px]">{j.period}</p>
-          </div>
+          </Reveal>
         ))}
       </div>
     </section>
