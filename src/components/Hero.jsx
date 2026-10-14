@@ -119,7 +119,6 @@ export default function Hero() {
             <h1 className="w-full text-[40px] leading-[1.1] font-semibold sm:text-[56px] lg:text-[70px] lg:leading-normal">
               Senior Product Designer
             </h1>
-            <p className="w-full text-[18px] md:text-[21px]">Designing intuitive digital products across platforms.</p>
             <p className="w-full text-[18px] md:text-[21px]">
               5+ Years Experience · UX Strategy · Design Systems · Mobile &amp; Web · SaaS &amp; OTT
             </p>
