@@ -7,7 +7,7 @@ export const LINKS = {
   whatsapp: 'https://wa.me/919566951943',
   email: 'mailto:akashmailbox54@gmail.com',
   phone: 'tel:+919566951943',
-  resume: '/Akash_Pandurangan_Resume.pdf',
+  resume: '/Akash_Pandurangan_Senior_Product_Designer.pdf',
 }
 
 export const PROTOTYPES = {
