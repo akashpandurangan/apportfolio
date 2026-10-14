@@ -125,7 +125,6 @@ export default function Hero() {
           </Reveal>
           <Reveal delay={150} className="flex flex-wrap items-center justify-center gap-2">
             <Pill label="Behance" href={LINKS.behance} external icon={`${A}/icons/behance.svg`} />
-            <Pill label="Email" href={LINKS.email} icon={`${A}/icons/mail.svg`} />
             <Pill label="LinkedIn" href={LINKS.linkedin} external icon={`${A}/icons/linkedin.svg`} />
             <Pill href="#works">View my work</Pill>
             <Pill href={LINKS.resume} external>
